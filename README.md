@@ -1,4 +1,4 @@
-# AssignmentApp
+# Manage Assignment APP
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
@@ -33,8 +33,8 @@ Lien du projet déployé :
 ## Installation en local
 
 Pour tester le projet localement : 
-- Clonez la repository et lancez le [backend]() en suivant le README 
-- Clonez la repository [projet]()
+- Clonez la repository de l'API et lancez le [backend]() en suivant le README 
+- Clonez la repository [repository](https://github.com/Fitia-web/MBDS_Mr_Buffa_Front.git)
 - Installation des packages : ``npm install``
 - Lancer le projet: ``ng serve``
 - Accedez au site : ``http://localhost:4200/``
