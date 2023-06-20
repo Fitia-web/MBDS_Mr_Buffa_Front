@@ -1,0 +1,113 @@
+<body>
+  <div class="task-manager" cdkDropListGroup>
+    <!-- left bar starts -->
+    <div class="left-bar">
+
+
+      <div class="left-bar">
+        <div class="upper-part">
+          <div class="actions">
+            Assignments Management
+          </div>
+        </div>
+      </div>
+
+      <!-- left content starts -->
+      <div class="left-content">
+
+        <ul class="category-list">
+          <li class="item" *ngIf="utilisateur.isAdmin" (click)="ajouterAssignment()">
+            <mat-icon>library_add</mat-icon>
+            <span> &nbsp; Add Assignment</span>
+          </li>
+          <li class="item" (click)="disconnect()">
+            <mat-icon>logout</mat-icon>
+            <span> &nbsp; Log out</span>
+          </li>
+        </ul>
+      </div>
+      <!-- left content ends -->
+    </div>
+    <!--  -->
+    <!-- left bar ends -->
+
+    <!-- page content starts -->
+
+    <div class="page-content">
+
+      <div class="header">
+        <h5>Listes devoirs à rendre</h5>
+        <button class="header-pagination" (click)="dernierePage()" [disabled]="!(page < totalPages )"> <mat-icon>last_page</mat-icon></button>
+        <button class="header-pagination" (click)="pageSuivante()" [disabled]="!(page < totalPages )"> <mat-icon>navigate_next</mat-icon></button>
+        <button class="header-pagination"> {{page}} </button>
+        <button class="header-pagination" (click)="pagePrecedente()" [disabled]="(page == 1)"> <mat-icon>navigate_before</mat-icon></button>
+        <button class="header-pagination" (click)="premierePage()" [disabled]="(page == 1)"> <mat-icon>first_page</mat-icon></button>
+      </div>
+
+      <!-- tasks wrapper starts -->
+      <div class="tasks-wrapper"
+      cdkDropList
+      [cdkDropListData]="assignmentsNonRendus"
+      (cdkDropListDropped)="drop($event)">
+        <div class="task" *ngFor="let assignment of assignmentsNonRendus" cdkDrag [cdkDragDisabled]="!canDrag()">
+          <a href="/assignment/{{assignment._id}}">
+            <label>
+              <img [src]="assignment.image">
+              <span > Devoir {{assignment.matiere}} : {{assignment.nom}} </span>
+            </label>
+          </a>
+          <span class="tag approved">{{assignment.auteur}}</span>
+        </div>
+      </div>
+      <!-- tasks wrapper ends -->
+    </div>
+    <!--  -->
+    <!-- page content ends -->
+
+    <!-- right bar starts -->
+    <div class="right-bar">
+      <div class="top-part">
+        <img class="feather feather-users" src="./../../assets/svg/users.svg" alt="" />
+        <div>{{utilisateur.nom}}</div>
+      </div>
+      <div class="header">
+        <h5>Devoirs rendu</h5>
+        <button class="header-pagination" (click)="dernierePageRendus()"[disabled]="!(pageRendus < totalPagesRendus )"> <mat-icon>last_page</mat-icon></button>
+        <button class="header-pagination" (click)="pageSuivanteRendus()"[disabled]="!(pageRendus < totalPagesRendus )"> <mat-icon>navigate_next</mat-icon></button>
+        <button class="header-pagination"> {{pageRendus}} </button>
+        <button class="header-pagination" (click)="pagePrecedenteRendus()"[disabled]="(pageRendus == 1)"> <mat-icon>navigate_before</mat-icon></button>
+        <button class="header-pagination" (click)="premierePageRendus()"[disabled]="(pageRendus == 1)"> <mat-icon>first_page</mat-icon></button>
+      </div>
+
+
+      <div class="right-content" cdkDropList
+        [cdkDropListData]="assignmentsRendus"
+        (cdkDropListDropped)="drop($event)"
+        >
+        <div class="task-box glisser" *ngIf="utilisateur.isAdmin">
+          <div class="description-task" >
+            <div class="task-name">Glisser ici pour rendre un devoir</div>
+          </div>
+        </div>
+        <div class="task-box blue" *ngFor="let assignment of assignmentsRendus" >
+          <a href="/assignment/{{assignment._id}}">
+            <div class="description-task">
+              <div class="matieres">
+                <img [src]="assignment.image"/>
+                <div class="task-name">{{assignment.matiere}}  : {{assignment.nom}}  </div>
+              </div>
+              <div class="time">Rendu par {{assignment.auteur}}  le {{assignment.dateDeRendu | date:'dd-MM-YYYY'}} </div>
+            </div>
+
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <section>
+
+    </section>
+    <!-- right bar ends -->
+  </div>
+</body>

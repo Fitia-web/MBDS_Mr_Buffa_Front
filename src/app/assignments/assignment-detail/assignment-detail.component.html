@@ -1,0 +1,48 @@
+
+  <div class="main">
+    <div *ngIf="!isEditMode" class="container a-container" id="a-container">
+      <form class="form" id="a-form" method="" action="">
+        <h2 class="title">Détails du devoir</h2>
+        <span class="form__span"><strong>A rendre le : </strong>{{assignmentTransmis.dateDeRendu | date:'dd/MM/YYYY'}} </span>
+        <span class="form__span"><strong>Auteur :</strong> {{assignmentTransmis.auteur}} </span>
+        <span *ngIf="assignmentTransmis.note" class="form__span"><strong>Note : </strong> {{assignmentTransmis.note}} </span>
+        <span *ngIf="assignmentTransmis.remarque || assignmentTransmis.remarque == '' " class="form__span"> <strong>Remarques : </strong>{{assignmentTransmis.remarque}} </span>
+        <button (click) = "editMode()" class="button submit">Modifier</button>
+        <br>
+        <a href="home" nclass="form__link">Retourner à l'accueil</a>
+      </form>
+
+    </div>
+
+    <div *ngIf="isEditMode" class="container a-container" id="a-container">
+      <form class="form" id="a-form" method="" action="">
+        <h2 class="title">Détails du devoir</h2>
+        <span class="form__span tag error" *ngIf = "thereIsError">{{error}}</span>
+
+        <input [(ngModel)] = "assignmentTransmis.nom" name="nom" class="form__input" [value] = "assignmentTransmis.nom" type="text" placeholder="Nom" />
+        <input [(ngModel)] = "assignmentTransmis.dateDeRendu" name="dateDeRendu" [value] = "assignmentTransmis.dateDeRendu | date:'yyyy-MM-dd'" class="form__input" type="date"/>
+        <input [(ngModel)] = "assignmentTransmis.auteur" name="auteur" class="form__input" [value] = "assignmentTransmis.auteur" type="text" placeholder="Auteur" />
+        <input [(ngModel)] = "assignmentTransmis.note" name="note" class="form__input" [value] = "assignmentTransmis.note" type="number" min="0" max="20" placeholder="Note" />
+        <textarea [(ngModel)] = "assignmentTransmis.remarque" name="remarque" class="form__input" [value] = "assignmentTransmis.remarque" type="text" placeholder="Remarque" ></textarea>
+
+        <div class="btn">
+          <button (click)="editMode()" class="button submit">Annuler</button>
+          <button (click)="onDelete()" class="button delete">Supprimer</button>
+          <button (click)="onAssignmentRendu()" class="button cancel">Modifier</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="switch" id="switch-cnt">
+      <div class="switch__container" id="switch-c1">
+        <img [src]="assignmentTransmis.image">
+        <h2 class="title">{{assignmentTransmis.matiere}} </h2>
+        <p class="description">{{assignmentTransmis.nom}}</p>
+
+        <mat-icon color="accent" *ngIf="assignmentTransmis.rendu">check_circle</mat-icon> <strong *ngIf="assignmentTransmis.rendu"> Rendu </strong>
+
+      </div>
+
+    </div>
+
+  </div>

@@ -1,0 +1,11 @@
+
+<div class="main">
+  <div class="container" id="a-container">
+    <form class="form" ngForm #loginForm (submit)="onSubmit(); loginForm.reset()">
+      <h2 class="title">Login</h2>
+      <input [(ngModel)]="login" name ="login" class="form__input" type="text" placeholder="Pseudo" required/>
+      <input [(ngModel)]="motDePasse" name="motDePasse" class="form__input" type="password" placeholder="Mot de passe" required/>
+      <button class="button submit">Connexion</button>
+    </form>
+  </div>
+</div>

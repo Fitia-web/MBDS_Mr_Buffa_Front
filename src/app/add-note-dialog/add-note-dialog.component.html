@@ -1,0 +1,15 @@
+
+    <div class="main">
+      <div class="container" id="a-container">
+        <form class="form" ngForm #addNoteForm (submit)="rendre(); addNoteForm.reset()">
+          <h2 class="title">Noter l'assignment de {{data.assignment.auteur}} </h2>
+          <span class="form__span tag error" *ngIf = "thereIsError">{{error}}</span>
+          <input [(ngModel)] = "note" name="note" class="form__input" type="number" min="0" max="20" placeholder="Note" />
+          <textarea [(ngModel)] = "remarque" name="remarques" class="form__input" type="text" placeholder="Remarques"></textarea>
+          <button class="button submit" [disabled]="!note || !remarque">RENDRE</button>
+          <br>
+          <a (click)="onNoClick()" nclass="form__link">Annuler</a>
+        </form>
+      </div>
+
+    </div>

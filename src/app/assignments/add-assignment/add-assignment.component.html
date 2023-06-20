@@ -1,0 +1,69 @@
+
+<div class="main">
+  <div class="container" id="a-container">
+
+    <form ngForm class="form">
+      <h2 class="title">Ajouter nouvel assignment</h2>
+      <mat-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form class="form" [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Matière</ng-template>
+
+              <select [(ngModel)]="matiere" name="matiere" class="form__input" formControlName="firstCtrl" required>
+                <option disabled selected>Choisissez la matière</option>
+                <option *ngFor="let mat of matieres" class="form__span" [ngValue]="mat">{{mat.nom}}</option>
+              </select>
+
+            <div>
+              <button mat-button matStepperNext>Suivant</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" >
+          <form class="form" [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Intitulé du devoir</ng-template>
+              <input class="form__input" [(ngModel)]="nomAssignment" name="nomAssignment" matInput formControlName="secondCtrl" placeholder="Nom du devoir" required>
+            <div>
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button matStepperNext>Suivant</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup" >
+          <form class="form" [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Elève</ng-template>
+              <input class="form__input" [(ngModel)]="auteur" name="auteur"  matInput formControlName="thirdCtrl" placeholder="Nom de l'élève" required>
+            <div>
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button matStepperNext>Suivant</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="fourthFormGroup" >
+          <form class="form" [formGroup]="fourthFormGroup">
+            <ng-template matStepLabel>Date De Rendu</ng-template>
+              <input class="form__input" [(ngModel)]="dateDeRendu" name="dateDeRendu"  matInput formControlName="fourthCtrl" type="date" required>
+            <div>
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button matStepperNext>Suivant</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Confirmation</ng-template>
+          <div class="form">
+            <span class="form__span">Date de Rendu : {{dateDeRendu | date: 'dd-MM-yyy'}}. Devoir {{matiere.nom}} : {{nomAssignment}} pour {{auteur}}</span>
+            <span class="form__span">Voulez-vous enregistrer ? </span>
+            <div class="forms__icons">
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button (click)="onSubmit()">Ajouter</button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-stepper>
+
+      <a (click)="fermer()" nclass="form__link">Annuler</a>
+  </form>
+  </div>
+
+</div>
