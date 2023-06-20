@@ -39,8 +39,8 @@ Pour tester le projet localement :
 - Lancer le projet: ``ng serve``
 - Accedez au site : ``http://localhost:4200/``
 - Login :
-  - Admin :
-  - Utilisateur normal :
+  - Admin : pseudo:test  mdp:test
+  - Utilisateur normal : login:Jena6  mdp:jena12
 
 ## DEVELOPPER PAR
 
